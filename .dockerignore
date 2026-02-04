@@ -1,0 +1,9 @@
+*.ipynb
+*.csv
+*.md
+__pycache__
+req-ipynb.txt
+DOCKERFILE
+.dockerignore
+.gitignore
+
