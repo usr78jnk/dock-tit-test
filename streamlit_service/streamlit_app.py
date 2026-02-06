@@ -2,6 +2,9 @@ import streamlit as st
 import requests
 from requests.exceptions import ConnectionError
 
+# titanic-api - это название сервиса в docker-compose.yaml
+# Контейнеры видят друг друга во внутреней сети по портам
+# Аналогично, можно указать и любой другой рабочий IP-адрес
 ip_api = "titanic-api"
 port_api = "5000"
 
@@ -37,7 +40,7 @@ if st.button("Predict"):
 
         try:
             # Отправка запроса к Flask API
-            response = requests.post(f"http://{ip_api}:{port_api}/predict_model", json=data)
+            response = requests.post(f"http://{ip_api}:{port_api}/predict", json=data)
 
             # Проверка статуса ответа
             if response.status_code == 200:
