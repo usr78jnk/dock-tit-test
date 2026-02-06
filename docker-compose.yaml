@@ -1,0 +1,34 @@
+version: '3.8' # version of docker compose
+
+# description services
+services:
+  # first sercice
+  titanic-api:
+    # Описание всех стадий создания, запуска, работы контейнера
+    build:
+      context: .
+      dockerfile: ./titanic_api/Dockerfile  # show where is located Dockerfile in whitch we create Docker image
+    image: titanic_api:latest               # the name of our container Arbitrary name
+    container_name: titanic_api             # Arbitrary container name
+    # Проброс портов, мы не обязаны выводить наружу,
+    # Можем исделать доступность сервиса только для внутренего пользования 
+    ports:
+      - "5000:5000"
+    # тот самый прикол с некопированием фалов, а ссылкой на настоящий
+    # Делается для того, что-бы на ходу изменять параметры модели,
+    # Или поведения всего приложения прямо на ходу
+    volumes:
+      - ./titanic_api/model.pkl:/app/model.pkl
+
+  # next service
+  streamlit-web:
+    build:
+      context: .
+      dockerfile: ./streamlit_service/Dockerfile
+    image: streamlit_service:latest
+    container_name: streamlit_service
+    ports:
+      - "8000:8501"
+    volumes:
+      - ./streamlit_service/streamlit_app.py:/app/streamlit_app.py
+
