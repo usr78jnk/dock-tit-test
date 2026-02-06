@@ -17,14 +17,14 @@ RUN apt-get update && apt-get install -y \
 # И заодно чистим логи, незачем нам они
 
 # Затем со своего компа, со совей рабочей директории копируем файл с зависимостями
-COPY ./requirements.txt /app
+COPY ./titanic_api/requirements.txt /app
 
 # Далее установка, тех самых завиисимостей, и знакомая нам команда RUN
 RUN pip3 install -r requirements.txt
 
 # не хорошо копировать все подряд, но есть решение, ао аналогии с GitHub - 
 # создвть .dockerignore
-COPY . /app
+COPY ./titanic_api /app
 
 # Как оказалось, CMD - будет выполнятся при запуске контейнера
 # в отличии от RUN - который работает при сборке контейнера
