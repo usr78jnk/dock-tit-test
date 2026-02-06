@@ -2,11 +2,7 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-RUN apt update && apt install -y \
-    build-essential \
-    curl \
-    libgl1-mesa-glx \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
 
 # At first we should to copy requirenments.txt, and install dependencies
 COPY ./streamlit_service/requirements.txt /app
